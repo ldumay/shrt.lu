@@ -97,7 +97,7 @@ class LinkController extends Controller
 
     // Generate a random string between 4 and 10
     public function randomString() {
-        $characters = "abcdefghijklmnopqrstuvwxyzABCDERFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         $length = mt_rand(4, 10);
         $randomString = "";
         for ($i = 0; $i < $length; $i++) {
