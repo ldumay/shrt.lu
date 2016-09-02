@@ -12,16 +12,10 @@
     <title>Shrt.lu</title>
 
     <!-- Bootstrap core CSS -->
-    {!! Html::style('css/bootstrap.min.css') !!}
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
 
-            <!-- Custom styles for this template -->
-    {!! Html::style('css/app.css') !!}
-
-            <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="/css/app.css" type="text/css" />
 </head>
 
 <body>
@@ -30,10 +24,10 @@
         <div class="cover-container">
             <div class="masthead clearfix">
                 <div class="inner">
-                    <h3 class="masthead-brand">Shrt.lu</h3>
+                    <h3 class="masthead-brand">{{ env('APP_NAME') }}</h3>
                     <nav>
                         <ul class="nav masthead-nav">
-                            <li class="active"><a href="{{ URL::route('home') }}">Home</a></li>
+                            <li class="active"><a href="{{ env('APP_URL') }}">Home</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -42,18 +36,21 @@
             <div class="inner cover">
                 <h1 class="cover-heading">Stats for {{ $data['slug'] }}</h1>
                 <div class="lead">
-                    This URL has been clicked <b style="color: lime">{{ $data['count'] }}</b>.
+                    @if ($data['count'] <= 0)
+                        This URL hasn't been clicked yet.
+                    @elseif ($data['count'] === 1)
+                        This URL has been clicked <b style="color: lime">1</b> time.
+                    @else
+                        This URL has been clicked <b style="color: lime">{{ $data['count'] }}</b> times.
+                    @endif
                 </div>
             </div>
 
             <div class="mastfoot">
                 <div class="inner">
                     <p>
-                        Copyright <a href="{{ URL::route('home') }}">{{ env('APP_NAME') }}</a> - 2016.
+                        Copyright <a href="{{ env('APP_URL') }}">{{ env('APP_NAME') }}</a> - 2016.
                         Made by <a href="https://twitter.com/_ValpeX" target="_blank">@_ValpeX</a>.
-                            <span style="color:#32cd32">
-                                v{{ env('APP_VERSION') }}
-                            </span>
                     </p>
                 </div>
             </div>
@@ -64,6 +61,6 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-{!! Html::script('js/jquery-1.12.3.min.js') !!}
+<script type="text/javascript" src="/js/jquery-1.12.3.min.js"></script>
 </body>
 </html>
